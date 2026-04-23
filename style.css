@@ -19,6 +19,13 @@
     font-family: "Inter", sans-serif;
 }
 
+/* This stops images from overflowing their boxes */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -171,6 +178,7 @@ a {
     justify-content: center;
 }
 
+/* Updated hero-photo block */
 .hero-photo {
     width: min(100%, 380px);
     aspect-ratio: 1 / 1;
@@ -180,10 +188,6 @@ a {
         linear-gradient(145deg, rgba(124, 92, 255, 0.12), rgba(37, 194, 255, 0.06)),
         var(--surface);
     box-shadow: var(--shadow);
-    display: grid;
-    place-items: center;
-    color: var(--muted);
-    font-weight: 600;
     position: relative;
     overflow: hidden;
 }
@@ -194,6 +198,24 @@ a {
     inset: 18px;
     border-radius: 24px;
     border: 1px dashed rgba(255, 255, 255, 0.12);
+    z-index: 2; /* Keeps the dashed border on top */
+    pointer-events: none;
+}
+
+/* This forces the container to respect the 18px dashed border gap */
+.hero-photo span {
+    position: absolute;
+    inset: 18px;
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* This tells the image to perfectly cover the box without stretching */
+.hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .section {
@@ -308,6 +330,13 @@ a {
     color: var(--muted);
     text-align: center;
     padding: 16px;
+}
+
+.screenshot-img {
+    width: 100%;       
+    height: auto;      
+    display: block;    
+    border-radius: 8px; 
 }
 
 .grid-2,
@@ -501,13 +530,9 @@ a {
         font-size: 2.4rem;
     }
 
+    /* Updated mobile view for the image */
     .hero-photo {
-        width: 100%;
+        width: min(100%, 300px); 
+        margin: 0 auto; 
     }
-}
-.screenshot-img {
-    width: 100%;       /* Makes the image fill the width of the box */
-    height: auto;      /* Keeps the exact 1080x2400 tall shape */
-    display: block;    /* Removes any weird invisible spaces below the image */
-    border-radius: 8px; /* Optional: adds nice curved corners to your phone screenshot */
 }
